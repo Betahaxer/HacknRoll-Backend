@@ -1,6 +1,7 @@
 # testing
 from fastapi import FastAPI
 from pydantic import BaseModel
+import google.generativeai as genai
 
 # Create FastAPI instance
 app = FastAPI()
@@ -12,7 +13,8 @@ class Message(BaseModel):
 # Define an endpoint
 @app.post("/echo/")
 def echo_message(message: Message):
-    """
-    This endpoint echoes back the input message.
-    """
-    return {"original_message": message.text, "message_length": len(message.text)}
+    genai.configure(api_key="AIzaSyCBHpAKMNp2P6JJx1MxFacxDW3g1mMIIZ0")
+    model = genai.GenerativeModel("gemini-1.5-flash")
+    response = model.generate_content("Explain how AI works")
+    return {"response": response.text, "message_length": len(response.text)}
+
