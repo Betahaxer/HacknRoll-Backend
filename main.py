@@ -5,6 +5,7 @@ from textwrap import dedent
 import json
 from dotenv import load_dotenv
 import os
+import asyncio
 
 app = FastAPI()
 
@@ -15,7 +16,7 @@ class Message(BaseModel):
     action: str
 
 @app.post("/play/")
-def play(message: Message):
+async def play(message: Message):
     load_dotenv()
     gemini_api_key = os.getenv("GEMINI_API_KEY")
     genai.configure(api_key=gemini_api_key)
@@ -40,7 +41,7 @@ def play(message: Message):
 
     The story should be written in the player's third perspective, addressing the player by their username. The girl should be referred to simply as the girl or she. The story should be kept to 150 words.
     """
-    response = model.generate_content(dedent(prompt))
+    response = await asyncio.to_thread(model.generate_content, dedent(prompt))
     try:
         parsed_response = json.loads(response.text)
         return parsed_response 
