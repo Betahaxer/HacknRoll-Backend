@@ -10,9 +10,6 @@ import uvicorn
 
 app = FastAPI()
 
-if __name__ == "__main__":
-  uvicorn.run("server.api:app", host="0.0.0.0", port=8000, reload=True)
-
 class Message(BaseModel):
     username: str
     personality: str
@@ -34,7 +31,7 @@ async def play(message: Message):
     Scenario: {message.scenario}
     Player's Action: {message.action}
 
-    Considering the personality of the girl, the scenario and the player's action, write a story that strings together each of the player's action and the girl's responses. In the story, the girl should be hard to impress, and act moderately irrationally to the player's actions. There should also be chances of random, unintended consequences of the player's action. You should describe the story as if it actually happened and the flow of the story should be as smooth as possible. The story should have an ending that shows how the verdict is achieved. The player should also have a decent chance at succeeding in impressing the girl in the story.
+    Considering the personality of the girl, the scenario and the player's action, write a story that strings together each of the player's action and the girl's responses. In the story, the girl should be hard to impress, and act moderately irrationally to the player's actions. There should also be chances of random, unintended consequences of the player's action. You should describe the story as if it actually happened and the flow of the story should be as smooth as possible. The story should have an ending that shows how the verdict is achieved.
 
     The output must be in json format.
     Example:
