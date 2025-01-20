@@ -12,7 +12,7 @@ from fastapi.middleware.cors import CORSMiddleware
 app = FastAPI()
 
 origins = [
-    "https://markneoneo.itch.io/love-by-ai",
+    "https://html-classic.itch.zone",
 ]
 
 app.add_middleware(
