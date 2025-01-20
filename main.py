@@ -7,8 +7,21 @@ from dotenv import load_dotenv
 import os
 import asyncio
 import uvicorn
+from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI()
+
+origins = [
+    "https://markneoneo.itch.io/love-by-ai",
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=False,
+    allow_methods=["POST"],
+    allow_headers=["*"],
+)
 
 class Message(BaseModel):
     username: str
